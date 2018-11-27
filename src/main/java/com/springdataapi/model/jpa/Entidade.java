@@ -1,4 +1,4 @@
-package com.springdataapi.model;
+package com.springdataapi.model.jpa;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +9,7 @@ import javax.persistence.Transient;
 @Entity
 public class Entidade {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String nome;
@@ -32,7 +32,7 @@ public class Entidade {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
+	
 	public String getEstado() {
 		return estado;
 	}
