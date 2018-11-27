@@ -8,7 +8,7 @@ import org.springframework.data.redis.serializer.GenericToStringSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
-public class AppConfig {
+public class RedisConfig {
 	@Bean
 	JedisConnectionFactory jedisConnectionFactory() {
 		return new JedisConnectionFactory();
