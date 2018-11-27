@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,6 +64,11 @@ public class EntidadeController {
 		return entidade;
 	}
 
+	@PostMapping("entidades/{paramId}")
+	public @ResponseBody Entidade createUpdateEntidade(@RequestBody Entidade novaEntidade, @PathVariable String paramId) {
+		return updateEntidade(novaEntidade,paramId);
+	}
+	
 	@PutMapping("entidades/{paramId}")
 	public @ResponseBody Entidade updateEntidade(@RequestBody Entidade novaEntidade, @PathVariable String paramId) {
 		Long id = Long.parseLong(paramId);
