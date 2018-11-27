@@ -41,7 +41,7 @@ public class EntidadeController {
 			throw new ResourceNotFoundException("Nenhuma entidade retornada");
 		
 		for (Entidade entidade : entidades) {
-			entidade.setEstado((String) getValue(entidade.getId().toString()));
+			entidade.setEstado((String) getValue(entidade.getEntidadeId().toString()));
 		}
 
 		return entidades;
@@ -75,15 +75,15 @@ public class EntidadeController {
 			entidadeRepository.save(entidade);
 			
 			entidade.setEstado(novaEntidade.getEstado());
-			setValue(entidade.getId(), novaEntidade.getEstado());
+			setValue(entidade.getEntidadeId(), novaEntidade.getEstado());
 		}
 		else {
 			entidade = novaEntidade;
-			entidade.setId(id);
+			entidade.setEntidadeId(id);
 			entidade = entidadeRepository.save(entidade);
 			
 			entidade.setEstado(novaEntidade.getEstado());
-			setValue(entidade.getId(), novaEntidade.getEstado());
+			setValue(entidade.getEntidadeId(), novaEntidade.getEstado());
 		}
 		
 		return entidade;

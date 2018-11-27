@@ -10,19 +10,19 @@ import javax.persistence.Transient;
 public class Entidade {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long entidadeId;
 
 	private String nome;
 
 	@Transient
 	private String estado;
 
-	public Long getId() {
-		return id;
+	public Long getEntidadeId() {
+		return entidadeId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setEntidadeId(Long entidadeId) {
+		this.entidadeId = entidadeId;
 	}
 
 	public String getNome() {

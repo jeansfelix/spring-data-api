@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS entidade (
-    id BIGINT NOT NULL AUTO_INCREMENT, 
+    entidade_id BIGINT NOT NULL AUTO_INCREMENT, 
     nome VARCHAR(100) NOT NULL, 
-    PRIMARY KEY(id)
+    PRIMARY KEY(entidade_id)
 );
