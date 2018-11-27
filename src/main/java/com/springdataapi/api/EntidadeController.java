@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,8 +12,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.server.ResponseStatusException;
 
-import com.springdataapi.model.exception.ResourceNotFoundException;
 import com.springdataapi.model.jpa.Entidade;
 import com.springdataapi.model.jpa.EntidadeRepository;
 
@@ -38,7 +39,7 @@ public class EntidadeController {
 		Iterable<Entidade> entidades = entidadeRepository.findAll();
 
 		if (!entidades.iterator().hasNext())
-			throw new ResourceNotFoundException("Nenhuma entidade retornada");
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Nenhuma entidade retornada");
 		
 		for (Entidade entidade : entidades) {
 			entidade.setEstado((String) getValue(entidade.getEntidadeId().toString()));
@@ -54,7 +55,7 @@ public class EntidadeController {
 		Optional<Entidade> optionalEntidade = entidadeRepository.findById(id);
 		
 		if (!optionalEntidade.isPresent())
-			throw new ResourceNotFoundException("Não existe entidade com id=" + paramId);
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Não existe entidade com id=" + paramId);
 		
 		Entidade entidade = entidadeRepository.findById(id).get();
 		entidade.setEstado((String) getValue(paramId));
