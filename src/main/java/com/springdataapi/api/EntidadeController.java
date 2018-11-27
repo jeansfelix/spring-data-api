@@ -1,5 +1,7 @@
 package com.springdataapi.api;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
@@ -10,12 +12,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.springdataapi.model.exception.ResourceNotFoundException;
 import com.springdataapi.model.jpa.Entidade;
 import com.springdataapi.model.jpa.EntidadeRepository;
 
 @Controller
 @RequestMapping("/api")
-public class AppController {
+public class EntidadeController {
 	@Autowired
 	private EntidadeRepository entidadeRepository;
 
@@ -34,6 +37,9 @@ public class AppController {
 	public @ResponseBody Iterable<Entidade> getEntidades() {
 		Iterable<Entidade> entidades = entidadeRepository.findAll();
 
+		if (!entidades.iterator().hasNext())
+			throw new ResourceNotFoundException("Nenhuma entidade retornada");
+		
 		for (Entidade entidade : entidades) {
 			entidade.setEstado((String) getValue(entidade.getId().toString()));
 		}
@@ -41,11 +47,16 @@ public class AppController {
 		return entidades;
 	}
 	
-	@GetMapping("entidades/{id}")
-	public @ResponseBody Iterable<Entidade> getEntidade() {
-		Iterable<Entidade> entidades = entidadeRepository.findAll();
-
-		return entidades;
+	@GetMapping("entidades/{paramId}")
+	public @ResponseBody Entidade getEntidade(@PathVariable String paramId) {
+		Long id = Long.parseLong(paramId);
+		
+		Optional<Entidade> optionalEntidade = entidadeRepository.findById(id);
+		
+		if (!optionalEntidade.isPresent())
+			throw new ResourceNotFoundException("Não existe entidade com id=" + paramId);
+		
+		return entidadeRepository.findById(id).get();
 	}
 
 	@PutMapping("entidades/{paramId}")
