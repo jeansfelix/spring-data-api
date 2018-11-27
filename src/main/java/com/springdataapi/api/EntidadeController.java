@@ -56,7 +56,10 @@ public class EntidadeController {
 		if (!optionalEntidade.isPresent())
 			throw new ResourceNotFoundException("Não existe entidade com id=" + paramId);
 		
-		return entidadeRepository.findById(id).get();
+		Entidade entidade = entidadeRepository.findById(id).get();
+		entidade.setEstado((String) getValue(paramId));
+		
+		return entidade;
 	}
 
 	@PutMapping("entidades/{paramId}")
