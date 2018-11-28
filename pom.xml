@@ -6,7 +6,7 @@
 
 	<groupId>com</groupId>
 	<artifactId>spring-data-api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<packaging>jar</packaging>
 
 	<name>spring-data-api</name>
@@ -72,6 +72,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-
 </project>
