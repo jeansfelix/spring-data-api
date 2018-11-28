@@ -1,20 +1,14 @@
-CREATE TABLE IF NOT EXISTS usuario(
-	usuario_id BIGINT NOT NULL AUTO_INCREMENT,
-	nome VARCHAR(100) NOT NULL,
-	senha VARCHAR(50) NOT NULL,
-	PRIMARY KEY (usuario_id),
-	UNIQUE KEY (nome)
+create table IF NOT EXISTS usuario(
+	nome varchar(50) not null primary key,
+	senha varchar(100) not null,
+	habilitado boolean not null
 );
-
-CREATE TABLE IF NOT EXISTS usuario_permissao(
-	usuario_permissao_id BIGINT NOT NULL AUTO_INCREMENT,
-	usuario_id BIGINT NOT NULL,
-	permissao VARCHAR(100) NOT NULL,
-	PRIMARY KEY (usuario_permissao_id),
-	UNIQUE KEY (usuario_id,permissao),
-	CONSTRAINT FK_USUARIO FOREIGN KEY (usuario_id) REFERENCES usuario (usuario_id)
+create table IF NOT EXISTS permissao (
+	usuario varchar(50) not null,
+	perfil varchar(50) not null,
+	unique key (usuario, perfil),
+	constraint fk_permissao_usuario foreign key(usuario) references usuario(nome)
 );
-
 
 CREATE TABLE IF NOT EXISTS entidade (
     entidade_id BIGINT NOT NULL AUTO_INCREMENT, 
