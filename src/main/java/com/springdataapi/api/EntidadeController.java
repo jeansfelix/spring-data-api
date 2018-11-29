@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.springdataapi.model.jpa.Entidade;
@@ -32,7 +33,11 @@ public class EntidadeController {
 	}
 
 	public void setValue(final Long key, final String value) {
-		template.opsForValue().set(key.toString(), value);
+		try {
+			template.opsForValue().set(key.toString(), value);
+		} catch (IllegalArgumentException e) {
+			throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "O campo estado não pode ser nulo");
+		}
 	}
 
 	@GetMapping("entidades")
@@ -41,58 +46,59 @@ public class EntidadeController {
 
 		if (!entidades.iterator().hasNext())
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Nenhuma entidade retornada");
-		
+
 		for (Entidade entidade : entidades) {
 			entidade.setEstado((String) getValue(entidade.getEntidadeId().toString()));
 		}
 
 		return entidades;
 	}
-	
+
 	@GetMapping("entidades/{paramId}")
 	public @ResponseBody Entidade getEntidade(@PathVariable String paramId) {
 		Long id = Long.parseLong(paramId);
-		
+
 		Optional<Entidade> optionalEntidade = entidadeRepository.findById(id);
-		
+
 		if (!optionalEntidade.isPresent())
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Não existe entidade com id=" + paramId);
-		
+
 		Entidade entidade = entidadeRepository.findById(id).get();
 		entidade.setEstado((String) getValue(paramId));
-		
+
 		return entidade;
 	}
 
-	@PostMapping("entidades/{paramId}")
-	public @ResponseBody Entidade createUpdateEntidade(@RequestBody Entidade novaEntidade, @PathVariable String paramId) {
-		return updateEntidade(novaEntidade,paramId);
+	@PostMapping("entidades")
+	@ResponseStatus(code = HttpStatus.CREATED)
+	public @ResponseBody Entidade createUpdateEntidade(@RequestBody Entidade novaEntidade) {
+		Entidade entidade = entidadeRepository.save(novaEntidade);
+		entidade.setEstado(novaEntidade.getEstado());
+		setValue(entidade.getEntidadeId(), novaEntidade.getEstado());
+		return entidade;
 	}
-	
+
 	@PutMapping("entidades/{paramId}")
 	public @ResponseBody Entidade updateEntidade(@RequestBody Entidade novaEntidade, @PathVariable String paramId) {
 		Long id = Long.parseLong(paramId);
-		
+
 		Entidade entidade;
-		
-		if (entidadeRepository.existsById(id)) 
-		{
+
+		if (entidadeRepository.existsById(id)) {
 			entidade = entidadeRepository.findById(id).get();
 			entidade.setNome(novaEntidade.getNome());
 			entidadeRepository.save(entidade);
-			
+
 			entidade.setEstado(novaEntidade.getEstado());
 			setValue(entidade.getEntidadeId(), novaEntidade.getEstado());
-		}
-		else {
+		} else {
 			entidade = novaEntidade;
-			entidade.setEntidadeId(id);
 			entidade = entidadeRepository.save(entidade);
-			
+
 			entidade.setEstado(novaEntidade.getEstado());
 			setValue(entidade.getEntidadeId(), novaEntidade.getEstado());
 		}
-		
+
 		return entidade;
 	}
 }
