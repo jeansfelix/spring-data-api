@@ -11,19 +11,21 @@
 
 # Source function library.
 
+NAME="spring-data-api"
+
+JVM_ARGS=""
 PROGRAM_ARGUMENTS=""
-PROGRAM_HOME="/opt/spring-data-api/"
-PROGRAM_JAR="springdataapi.jar"
-PROGRAM_NAME="spring-data-api"
+PROGRAM_HOME="/opt/$NAME/"
+PROGRAM_JAR="$NAME.jar"
+
+LOGFILE="/var/log/$NAME.log"
 
 start() {
     if [ -z `/usr/bin/pgrep -f "java -jar $PROGRAM_HOME$PROGRAM_JAR"` ]; then
-        echo "Starting $PROGRAM_NAME..."
-        cd ${ALB_HOME}
-
-        java -jar "$PROGRAM_HOME$PROGRAM_JAR" ${PROGRAM_ARGUMENTS} &
+        echo "Starting $NAME..."
+        java -jar "$PROGRAM_HOME$PROGRAM_JAR" $PROGRAM_ARGUMENTS > $LOGFILE &
     else
-        echo "$PROGRAM_NAME is already running"
+        echo "$NAME already running"
     fi
 }
 
@@ -31,17 +33,17 @@ stop() {
     if [ ! -z `/usr/bin/pgrep -f "java -jar $PROGRAM_HOME$PROGRAM_JAR"` ]; then
         echo "Stopping service..."
         kill -9 `/usr/bin/pgrep -f "java -jar $PROGRAM_HOME$PROGRAM_JAR"`
-        echo "$PROGRAM_NAME stopped."
+        echo "$NAME stopped."
     else
-        echo "$PROGRAM_NAME is not running"
+        echo "$NAME is not running"
     fi
 }
 
 status() {
 	if [ ! -z `/usr/bin/pgrep -f "java -jar $PROGRAM_HOME$PROGRAM_JAR"` ]; then
-       echo "$PROGRAM_NAME is running"
+       echo "$NAME already running"
     else
-        echo "$PROGRAM_NAME is not running"
+        echo "$NAME is not running"
     fi
 }
 
