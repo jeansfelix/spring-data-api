@@ -27,12 +27,12 @@ Entidade {
 
 Para acessarmos a api precisamos de um usuário com o perfil de "USUARIO" ou de "ADMINISTRADOR" cadastrado no banco de dados. Em toda requisição é necessário passar o Header HTTP Authorization com o valor "Basic xxxxxxxxxxx" onde o 'xxxxxxxxxxx' deve ser o base64 do texto composto por usuário e senha desta forma: 'usuario:senha'. Caso não seja passado este header o response da requisão será 401 Unauthorized em qualquer endpoint.
 
-### Listar entidades:
+## Listar entidades:
 Lista as entidades todas as entidades presentes.
 
 **URL :** /api/entidades
 
-**Parâmetros da URL :** 
+**Parâmetros da URL :** nenhum
 
 **Método HTTP :** GET
 
@@ -40,7 +40,7 @@ Lista as entidades todas as entidades presentes.
 
 **Requer Permissão :** USUARIO ou ADMINISTRADOR
 
-**Data :** 
+**Dados Retornados :** 
 ```json
 [{
     "entidadeId":1,
@@ -51,9 +51,95 @@ Lista as entidades todas as entidades presentes.
     "entidadeId":2,
     "nome":"nomeentidade2",
     "estado":"estado2"
- }
-]
+}]
 ```
+
+**Código do http status response :** 200 ok ou 201 no content
+
+## Recuperar entidade específica
+
+**URL :** /api/entidades/:entidadeId
+
+**Parâmetros da URL :** recebe o id da entidade que se deseja recuperar
+
+**Método HTTP :** GET
+
+**Requer Autenticacao :** SIM
+
+**Requer Permissão :** USUARIO ou ADMINISTRADOR
+
+**Dados Retornados :**  
+```json
+{
+    "entidadeId":1,
+    "nome":"nomeentidade1",
+    "estado":"estado1",
+}
+```
+
+**Código do http status response :** 200 ok
+
+## Criar entidade
+
+**URL :** /api/entidades
+
+**Parâmetros da URL :** nenhum. 
+
+**Método HTTP :** POST
+
+**Requer Autenticacao :** SIM
+
+**Requer Permissão :** USUARIO ou ADMINISTRADOR
+
+**Dados Enviados :** 
+```json
+{
+    "nome":"nomeentidade",
+    "estado":"estado",
+}
+```
+
+**Dados Retornados :** 
+```json
+{
+    "entidadeId": entidadeId,
+    "nome":"nomeentidade",
+    "estado":"estado",
+}
+```
+
+**Código do http status response :** 201 created 
+
+## Alterar entidade
+
+**URL :** /api/entidades/:entidadeId
+
+**Parâmetros da URL :** recebe o id da entidade que se deseja alterar 
+
+**Método HTTP :** POST
+
+**Requer Autenticacao :** SIM
+
+**Requer Permissão :** USUARIO ou ADMINISTRADOR
+
+**Dados Enviados :** 
+```json
+{
+    "nome":"nomeentidade",
+    "estado":"estado",
+}
+```
+
+**Dados Retornados :** 
+```json
+{
+    "entidadeId": entidadeId,
+    "nome":"nomeentidade",
+    "estado":"estado",
+}
+```
+
+**Código do http status response :** 200 ok
 
 # Build manual
 
