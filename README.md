@@ -15,6 +15,46 @@ Este serviço visa utilizar spring-data para gerenciar uma entidade utilizando d
 * [Maven](https://maven.apache.org/install.html)
 * [redis-server](https://redis.io/documentation)
 
+# API
+
+A api deste repositório serve para alterar os valores de uma entidade chamada Entidade que possui um id incremental, um campo para o nome e um valor de estado. 
+
+Entidade {
+  "id": 1,
+  "nome": "entidade1",
+  "estado": "ativa",
+}
+
+Para acessarmos a api precisamos de um usuário com o perfil de "USUARIO" ou de "ADMINISTRADOR" cadastrado no banco de dados. Em toda requisição é necessário passar o Header HTTP Authorization com o valor "Basic xxxxxxxxxxx" onde o 'xxxxxxxxxxx' deve ser o base64 do texto composto por usuário e senha desta forma: 'usuario:senha'. Caso não seja passado este header o response da requisão será 401 Unauthorized em qualquer endpoint.
+
+### Listar entidades:
+Lista as entidades todas as entidades presentes.
+
+**URL :** /api/entidades
+
+**Parâmetros da URL :** 
+
+**Método HTTP :** GET
+
+**Requer Autenticacao :** SIM
+
+**Requer Permissão :** USUARIO ou ADMINISTRADOR
+
+**Data :** 
+```json
+[{
+    "entidadeId":1,
+    "nome":"nomeentidade1",
+    "estado":"estado1",
+ }
+ {  
+    "entidadeId":2,
+    "nome":"nomeentidade2",
+    "estado":"estado2"
+ }
+]
+```
+
 # Build manual
 
 Para gerarmos o artefato do projeto basta utilizarmos o [wrapper do maven](https://github.com/takari/maven-wrapper) executarmos o comando:`./mvnw package`.
