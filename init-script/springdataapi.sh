@@ -14,25 +14,24 @@
 NAME="spring-data-api"
 
 JVM_ARGS=""
-PROGRAM_ARGUMENTS=""
-PROGRAM_HOME="/opt/$NAME/"
-PROGRAM_JAR="$NAME.jar"
+JAR_HOME="/opt/$NAME/"
+JAR_FILE="$NAME.jar"
 
 LOGFILE="/var/log/$NAME.log"
 
 start() {
-    if [ -z `/usr/bin/pgrep -f "java -jar $PROGRAM_HOME$PROGRAM_JAR"` ]; then
+    if [ -z `/usr/bin/pgrep -f "java -jar $JAR_HOME$JAR_FILE"` ]; then
         echo "Starting $NAME..."
-        java -jar "$PROGRAM_HOME$PROGRAM_JAR" $PROGRAM_ARGUMENTS > $LOGFILE &
+        java JVM_ARGS -jar "$JAR_HOME$JAR_FILE" > $LOGFILE &
     else
         echo "$NAME already running"
     fi
 }
 
 stop() {
-    if [ ! -z `/usr/bin/pgrep -f "java -jar $PROGRAM_HOME$PROGRAM_JAR"` ]; then
+    if [ ! -z `/usr/bin/pgrep -f "java -jar $JAR_HOME$JAR_FILE"` ]; then
         echo "Stopping service..."
-        kill -9 `/usr/bin/pgrep -f "java -jar $PROGRAM_HOME$PROGRAM_JAR"`
+        kill -9 `/usr/bin/pgrep -f "java -jar $JAR_HOME$JAR_FILE"`
         echo "$NAME stopped."
     else
         echo "$NAME is not running"
@@ -40,7 +39,7 @@ stop() {
 }
 
 status() {
-	if [ ! -z `/usr/bin/pgrep -f "java -jar $PROGRAM_HOME$PROGRAM_JAR"` ]; then
+	if [ ! -z `/usr/bin/pgrep -f "java -jar $JAR_HOME$JAR_FILE"` ]; then
        echo "$NAME already running"
     else
         echo "$NAME is not running"
