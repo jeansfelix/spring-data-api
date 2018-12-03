@@ -57,6 +57,7 @@ Lista as entidades todas as entidades presentes.
 * **Código do http status response :** 200 ok ou 201 no content
 
 ## Recuperar entidade específica
+Recupera uma entidade específica pelo seu id.
 
 * **URL :** /api/entidades/:entidadeId
 
@@ -80,6 +81,8 @@ Lista as entidades todas as entidades presentes.
 * **Código do http status response :** 200 ok
 
 ## Criar entidade
+
+Cria uma entidade nova e a retorna.
 
 * **URL :** /api/entidades
 
@@ -111,6 +114,8 @@ Lista as entidades todas as entidades presentes.
 * **Código do http status response :** 201 created 
 
 ## Alterar entidade
+
+Altera dados de uma entidade específica através do seu id.
 
 * **URL :** /api/entidades/:entidadeId
 
