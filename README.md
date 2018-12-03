@@ -30,17 +30,17 @@ Para acessarmos a api precisamos de um usuário com o perfil de "USUARIO" ou de 
 ## Listar entidades:
 Lista as entidades todas as entidades presentes.
 
-**URL :** /api/entidades
+* **URL :** /api/entidades
 
-**Parâmetros da URL :** nenhum
+* **Parâmetros da URL :** nenhum
 
-**Método HTTP :** GET
+* **Método HTTP :** GET
 
-**Requer Autenticacao :** SIM
+* **Requer Autenticacao :** SIM
 
-**Requer Permissão :** USUARIO ou ADMINISTRADOR
+* **Requer Permissão :** USUARIO ou ADMINISTRADOR
 
-**Dados Retornados :** 
+* **Dados Retornados :** 
 ```json
 [{
     "entidadeId":1,
@@ -54,21 +54,21 @@ Lista as entidades todas as entidades presentes.
 }]
 ```
 
-**Código do http status response :** 200 ok ou 201 no content
+* **Código do http status response :** 200 ok ou 201 no content
 
 ## Recuperar entidade específica
 
-**URL :** /api/entidades/:entidadeId
+* **URL :** /api/entidades/:entidadeId
 
-**Parâmetros da URL :** recebe o id da entidade que se deseja recuperar
+* **Parâmetros da URL :** recebe o id da entidade que se deseja recuperar
 
-**Método HTTP :** GET
+* **Método HTTP :** GET
 
-**Requer Autenticacao :** SIM
+* **Requer Autenticacao :** SIM
 
-**Requer Permissão :** USUARIO ou ADMINISTRADOR
+* **Requer Permissão :** USUARIO ou ADMINISTRADOR
 
-**Dados Retornados :**  
+* **Dados Retornados :**  
 ```json
 {
     "entidadeId":1,
@@ -77,21 +77,21 @@ Lista as entidades todas as entidades presentes.
 }
 ```
 
-**Código do http status response :** 200 ok
+* **Código do http status response :** 200 ok
 
 ## Criar entidade
 
-**URL :** /api/entidades
+* **URL :** /api/entidades
 
-**Parâmetros da URL :** nenhum. 
+* **Parâmetros da URL :** nenhum. 
 
-**Método HTTP :** POST
+* **Método HTTP :** POST
 
-**Requer Autenticacao :** SIM
+* **Requer Autenticacao :** SIM
 
-**Requer Permissão :** USUARIO ou ADMINISTRADOR
+* **Requer Permissão :** USUARIO ou ADMINISTRADOR
 
-**Dados Enviados :** 
+* **Dados Enviados :** 
 ```json
 {
     "nome":"nomeentidade",
@@ -99,7 +99,7 @@ Lista as entidades todas as entidades presentes.
 }
 ```
 
-**Dados Retornados :** 
+* **Dados Retornados :** 
 ```json
 {
     "entidadeId": entidadeId,
@@ -108,21 +108,21 @@ Lista as entidades todas as entidades presentes.
 }
 ```
 
-**Código do http status response :** 201 created 
+* **Código do http status response :** 201 created 
 
 ## Alterar entidade
 
-**URL :** /api/entidades/:entidadeId
+* **URL :** /api/entidades/:entidadeId
 
-**Parâmetros da URL :** recebe o id da entidade que se deseja alterar 
+* **Parâmetros da URL :** recebe o id da entidade que se deseja alterar 
 
-**Método HTTP :** POST
+* **Método HTTP :** POST
 
-**Requer Autenticacao :** SIM
+* **Requer Autenticacao :** SIM
 
-**Requer Permissão :** USUARIO ou ADMINISTRADOR
+* **Requer Permissão :** USUARIO ou ADMINISTRADOR
 
-**Dados Enviados :** 
+* **Dados Enviados :** 
 ```json
 {
     "nome":"nomeentidade",
@@ -130,7 +130,7 @@ Lista as entidades todas as entidades presentes.
 }
 ```
 
-**Dados Retornados :** 
+* **Dados Retornados :** 
 ```json
 {
     "entidadeId": entidadeId,
@@ -139,7 +139,7 @@ Lista as entidades todas as entidades presentes.
 }
 ```
 
-**Código do http status response :** 200 ok
+* **Código do http status response :** 200 ok
 
 # Build manual
 
