@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,6 +40,10 @@ public class EntidadeController {
 			throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "O campo estado não pode ser nulo");
 		}
 	}
+	
+	public void deleteKey(final Long key) {
+		template.delete(key.toString());
+	}
 
 	@GetMapping("entidades")
 	public @ResponseBody Iterable<Entidade> getEntidades() {
@@ -70,7 +75,7 @@ public class EntidadeController {
 	}
 
 	@PostMapping("entidades")
-	@ResponseStatus(code = HttpStatus.CREATED)
+	@ResponseStatus(HttpStatus.CREATED)
 	public @ResponseBody Entidade createUpdateEntidade(@RequestBody Entidade novaEntidade) {
 		Entidade entidade = entidadeRepository.save(novaEntidade);
 		entidade.setEstado(novaEntidade.getEstado());
@@ -100,5 +105,20 @@ public class EntidadeController {
 		}
 
 		return entidade;
+	}
+	
+	@DeleteMapping("entidades/{paramId}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	private @ResponseBody void deleteEntidade(@PathVariable String paramId) {
+		Long id = Long.parseLong(paramId);
+
+		Entidade entidade;
+
+		if (entidadeRepository.existsById(id)) {
+			entidade = entidadeRepository.findById(id).get();
+			entidadeRepository.delete(entidade);
+		}else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Não existe entidade com id=" + paramId);
+		}
 	}
 }
