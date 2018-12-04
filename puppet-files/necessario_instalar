@@ -1,0 +1,2 @@
+puppet module install puppetlabs-mysql --version 7.0.0
+puppet module install puppetlabs-java --version 3.2.0
