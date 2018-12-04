@@ -72,7 +72,7 @@ Recupera uma entidade específica pelo seu id.
 * **Dados Retornados :**  
 ```json
 {
-    "entidadeId":1,
+    "entidadeId":idEntidade1,
     "nome":"nomeentidade1",
     "estado":"estado1",
 }
@@ -105,7 +105,7 @@ Cria uma entidade nova e a retorna.
 * **Dados Retornados :** 
 ```json
 {
-    "entidadeId": entidadeId,
+    "entidadeId": idGerado,
     "nome":"nomeentidade",
     "estado":"estado",
 }
@@ -138,7 +138,7 @@ Altera dados de uma entidade específica através do seu id.
 * **Dados Retornados :** 
 ```json
 {
-    "entidadeId": entidadeId,
+    "entidadeId": idGerado,
     "nome":"nomeentidade",
     "estado":"estado",
 }
