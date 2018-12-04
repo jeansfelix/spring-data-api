@@ -46,7 +46,7 @@ Lista as entidades todas as entidades presentes.
     "entidadeId":1,
     "nome":"nomeentidade1",
     "estado":"estado1",
- }
+ },
  {  
     "entidadeId":2,
     "nome":"nomeentidade2",
