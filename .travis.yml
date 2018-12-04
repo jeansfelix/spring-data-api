@@ -1,0 +1,14 @@
+language: java
+
+jdk:
+  - oraclejdk8
+  
+script:
+  - cd ./app && ./mvnw package
+
+notifications:
+  email:
+    recipients:
+      - jean.s.felix@gmail.com
+    on_success: change
+    on_failure: always
