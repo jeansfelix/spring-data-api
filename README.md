@@ -156,12 +156,12 @@ Para subirmos o servidor basta executarmos este jar com o comando: `java -jar sp
 
 Precisamos instalar o mysql-server podemos seguir este tutorial [mysql server_installation](https://dev.mysql.com/doc/mysql-apt-repo-quick-guide/en/).
 Este será nosso banco de dados relacional e servirá para guardar os dados de usuario e as propriedades id e nome da classe Entidade.
-É preciso configurar um usuário com o nome 'usuario' com as permissões 'CREATE', 'DROP', 'UPDATE', 'DELETE', 'INDEX'.
+É preciso configurar um usuário com o nome 'usuario' com as permissões 'SELECT', 'CREATE', 'DROP', 'UPDATE', 'DELETE' and 'INDEX'.
 Para isto como admnistrador do banco execute os comandos abaixo:
 ```mysql
   CREATE DATABASE mydatabase;
   CREATE USER 'usuario'@'localhost' IDENTIFIED BY 'senha';
-  GRANT CREATE, DROP, UPDATE, DELETE, INDEX PRIVILEGES ON mydatabase.* TO 'usuario'@'localhost';
+  GRANT SELECT, CREATE, DROP, UPDATE, DELETE, INDEX PRIVILEGES ON mydatabase.* TO 'usuario'@'localhost';
 ```
 
 Precisamos instalar o [redis-server](https://redis.io/topics/quickstart) que é o banco de dados baseado em mapas.
