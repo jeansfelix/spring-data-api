@@ -1,12 +1,7 @@
-# <environment>/manifests/site.pp
+# <environment>/manifests/init.pp
 
 node "puppet-agent" {
 	include springdataapi
-	
-	exec{ 'create-download-dir':
-		command	=> "/bin/mkdir /tmp/downloads",
-		creates	=> "/tmp/downloads",
-	}
 	
 	exec{ 'apt-update':
 		command	=> "/usr/bin/apt-get update",
@@ -21,15 +16,29 @@ node "puppet-agent" {
 		ensure => running,
 	}
 	
-	package{ 'mysql-server':
-		require	=> Exec['apt-update'],
-		ensure	=> installed,
+	#Configurando JAVA
+	class { 'java':
+		distribution => 'jre',
+	}
+	
+	#Configurando mysql
+	class { '::mysql::server':
+		remove_default_accounts	=> true,
+	}
+	
+	mysql::db { 'mydatabase':
+		user			=> 'usuario',
+		password		=> 'senha',
+		host			=> 'localhost',
+		grant			=> ['SELECT', 'CREATE', 'DROP', 'UPDATE', 'DELETE', 'INDEX'],
+		sql				=> '/tmp/schema.sql',
+		import_timeout	=> 900,
 	}
 	
 	service { 'mysql':
 		ensure => running,
 	}
+	
 }
-
 
 
