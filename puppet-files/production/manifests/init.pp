@@ -30,7 +30,7 @@ node "puppet-agent" {
 		user			=> 'usuario',
 		password		=> 'senha',
 		host			=> 'localhost',
-		grant			=> ['SELECT', 'CREATE', 'DROP', 'UPDATE', 'DELETE', 'INDEX'],
+		grant			=> ['SELECT', 'CREATE', 'INSERT', 'DROP', 'UPDATE', 'DELETE', 'INDEX'],
 		sql				=> '/tmp/schema.sql',
 		import_timeout	=> 900,
 	}
@@ -38,7 +38,4 @@ node "puppet-agent" {
 	service { 'mysql':
 		ensure => running,
 	}
-	
 }
-
-
