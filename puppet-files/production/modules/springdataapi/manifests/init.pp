@@ -26,5 +26,12 @@ class springdataapi {
 		owner => "root",
 		group => "root",
 	}
+
+	file { '/etc/init.d/springdataapi.sh':
+		mode => "0755",
+		owner => "root",
+		group => "root",
+		source => "puppet:///modules/springdataapi/springdataapi.sh",
+	}
 }
 
