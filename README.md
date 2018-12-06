@@ -182,6 +182,10 @@ Para executar os testes do Jmeter basta importar o arquivo de teste da pasta [te
 Os testes estão configurados para rodar com 1000 threads para os usuários que permanecerão durante 10 segundos cada uma executando 10 requests. Totalizando 10000 requests 
 
 # Configuração de ambiente via puppet
-em construção...
+Os arquivos do puppet neste repositório são arquivos que devem estar no servidor(master) e se referem a arquitetura [client-server](https://puppet.com/docs/puppet/5.5/architecture.html) do puppet.
+
+Para configurar o seu ambiente via puppet basta copiar os dados da pasta production em [puppet_files](https://github.com/jeansfelix/spring-data-api/tree/master/puppet-files) para a pasta correspondente no servidor do puppet e instalar os modulos do puppet que estão descritos no arquivo [necessario_instalar](https://github.com/jeansfelix/spring-data-api/blob/master/puppet-files/necessario_instalar). Feito isto, verifique em qual node você quer configurar o app e edit o [init.pp](https://github.com/jeansfelix/spring-data-api/blob/master/puppet-files/production/manifests/init.pp). 
+
+A ISO base para criação do servidor foi um [Debian 9](https://www.debian.org/CD/netinst/) e durante a instalação foi selecionado SSH_server e webserver como configurações iniciais. Após criar a máquina basta configurar o cliente do puppet para se comunicar com o servidor e executar as configurações adicionais.
 
 
