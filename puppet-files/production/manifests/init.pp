@@ -3,11 +3,11 @@
 node "puppet-agent" {
 	include springdataapi
 	
-	exec{ 'apt-update':
+	exec { 'apt-update':
 		command	=> "/usr/bin/apt-get update",
 	}
 	
-	exec{ 'install-redis':
+	exec { 'install-redis':
 		require	=> Exec['apt-update'],
 		command	=> "/usr/bin/apt-get install redis-server -y",
 	}

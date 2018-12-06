@@ -26,12 +26,12 @@
 
 NAME="spring-data-api"
 
-JVM_ARGS=""
+JVM_ARGS="-Xmx2g -Xms1g"
 SPRING_PROFILE="-Dspring.profiles.active=prod"
 JAR_HOME="/opt/$NAME/"
 JAR_FILE="$NAME.jar"
 
-SCRIPT="java $SPRING_PROFILE $JVM_ARGS -jar $JAR_HOME$JAR_FILE $PROGRAM_ARGS"
+SCRIPT="java $SPRING_PROFILE $JVM_ARGS -jar $JAR_HOME$JAR_FILE"
 
 PIDFILE="/var/run/$NAME.pid"
 LOGFILE="/var/log/$NAME.log"
@@ -62,7 +62,7 @@ status() {
     if [ ! -f "$PIDFILE" ] || ! kill -0 $(cat "$PIDFILE"); then
         echo "Service $NAME not running" >&2
     else
-        echo "Service $NAME is not running" >&2
+        echo "Service $NAME is running" >&2
     fi
 }
 
