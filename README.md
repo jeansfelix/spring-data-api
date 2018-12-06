@@ -175,11 +175,20 @@ Por padrão ele utiliza o diretório **/opt/spring-data-api** para guardar o spr
 Possui as opções restart, start, stop, status.
 
 # Jmeter testes
-Para executar os testes do Jmeter basta importar o arquivo de teste da pasta [teste-de-carga](https://github.com/jeansfelix/spring-data-api/tree/master/teste-de-carga) e configurar a url e porta do servidor adequadamente em 'HTTP Request Defaults'.
+Para executar os testes do Jmeter basta importar o arquivos jmx em cada cenário de teste da pasta [teste-de-carga](https://github.com/jeansfelix/spring-data-api/tree/master/teste-de-carga) e configurar a url e porta do servidor adequadamente em 'HTTP Request Defaults'.
 
 ![HTTP Request Defaults](http://oi64.tinypic.com/ortiz8.jpg)
 
-Os testes estão configurados para rodar com 1000 threads para os usuários que permanecerão durante 10 segundos cada uma executando 10 requests. Totalizando 10000 requests 
+Foi utilizado um cenário com três diferentes número de usuários para os testes. 
+
+No cenário cada usuário realiza um GET para o endpoint /api/entidades e listam as 10 entidades presentes no banco de dados.
+
+* O primeiro foi utilizar 1000 threads e repetir 10 vezes.
+* O segundo foi utilizar 2000 threads e repetir 5 vezes.
+* O terceiro foi utilizar 10000 threads e repetir apenas 1 vez.
+
+Nos dois primeiros cenários não houveram erros no response. No terceiro cenário foi observado 0.37% de erro.
+Os relatórios em html gerados pelo jmeter se encontram no diretório [teste-de-carga](https://github.com/jeansfelix/spring-data-api/tree/master/teste-de-carga)
 
 # Configuração de ambiente via puppet
 Os arquivos do puppet neste repositório são arquivos que devem estar no servidor(master) e se referem a arquitetura [client-server](https://puppet.com/docs/puppet/5.5/architecture.html) do puppet.
